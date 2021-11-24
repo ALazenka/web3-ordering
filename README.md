@@ -36,11 +36,11 @@ npx hardhat node
 Run the smart contract test script
 
 ```shell
-npm run deploy:testnet
+npx hardhat run scripts/run.js
 ```
 
 Deploy the smart contract to testnet
 
 ```shell
-npm run test:contract
+npx hardhat run scripts/deploy.js --network rinkeby
 ```

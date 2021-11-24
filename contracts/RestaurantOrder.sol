@@ -26,7 +26,7 @@ contract RestaurantOrder {
 
   Order[] orders;
 
-  constructor() {
+  constructor() payable {
     console.log("This is my first contract!");
   }
 
@@ -44,6 +44,15 @@ contract RestaurantOrder {
     );
 
     emit NewOrder(msg.sender, block.timestamp);
+
+    // refund user some ether
+    uint256 prizeAmount = 0.0001 ether;
+    require(
+        prizeAmount <= address(this).balance,
+        "Trying to withdraw more money than the contract has."
+    );
+    (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+    require(success, "Failed to withdraw money from contract.");
   }
 
   function getAllOrders() public view returns (Order[] memory) {

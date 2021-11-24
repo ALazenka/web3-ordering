@@ -4,8 +4,6 @@
   "description": "Use web3 to place orders at a restaurant - executed & stored on Ethereum",
   "main": "index.js",
   "scripts": {
-    "deploy:testnet": "npx hardhat run scripts/deploy.js --network rinkeby",
-    "test:contract": "node scripts/run.js"
   },
   "keywords": ["web3", "ordering", "ethereum", "solidity", "smart contract", "buildspace"],
   "author": "",
