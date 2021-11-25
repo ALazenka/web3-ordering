@@ -24,6 +24,14 @@ const main = async () => {
   });
   await orderTxn.wait();
 
+  const [_, randomPerson] = await hre.ethers.getSigners();
+  waveTxn = await orderContract.connect(randomPerson).placeOrder({
+    tableSize: 2,
+    drink: "Pepsi",
+    appetizer: "Fries",
+    main: "Burger",
+  });
+
   // contract balance
   contractBalance = await hre.ethers.provider.getBalance(
     orderContract.address
@@ -32,14 +40,6 @@ const main = async () => {
     'Contract balance:',
     hre.ethers.utils.formatEther(contractBalance)
   );
-
-  const [_, randomPerson] = await hre.ethers.getSigners();
-  waveTxn = await orderContract.connect(randomPerson).placeOrder({
-    tableSize: 2,
-    drink: "Pepsi",
-    appetizer: "Fries",
-    main: "Burger",
-  });
 
   const totalOrders = await orderContract.getTotalOrders();
   console.log(`${totalOrders} order(s) placed in total`);
