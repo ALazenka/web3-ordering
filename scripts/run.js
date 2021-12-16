@@ -22,10 +22,11 @@ const main = async () => {
     appetizer: "Salad",
     main: "Steak & Potatoes",
   });
-  await orderTxn.wait();
+  const receipt = await orderTxn.wait();
+  console.log('Emitted events - ', receipt.events.length);
 
   const [_, randomPerson] = await hre.ethers.getSigners();
-  waveTxn = await orderContract.connect(randomPerson).placeOrder({
+  await orderContract.connect(randomPerson).placeOrder({
     tableSize: 2,
     drink: "Pepsi",
     appetizer: "Fries",
